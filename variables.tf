@@ -1,20 +1,23 @@
-variable "example_of_required_variable" {
+variable "name" {
+  description = "The name of the service you're referring to"
   type        = string
-  description = "Short description of the variable"
 }
 
-variable "example_of_variable_with_default_value" {
+variable "location" {
+  description = "The location to use for your service"
   type        = string
-  description = "Short description of the variable"
-  default     = "default_value"
 }
 
-variable "example_with_validation" {
-  type        = list(string)
-  description = "Short description of the variable"
-
-  validation {
-    condition     = length(var.example_with_validation) >= 2
-    error_message = "Error message which explains what's required and finished with a dot ."
+variable "labels" {
+  description = "Labels to apply to the service."
+  type        = map(string)
+  default = {
+    "terraform" = "true",
   }
+}
+
+variable "force_destroy" {
+  description = "The feature flag to allow destroying bucket event if it contains files."
+  type        = bool
+  default     = false
 }
