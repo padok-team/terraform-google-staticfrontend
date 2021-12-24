@@ -1,4 +1,4 @@
-# GCP Terraform module
+# Google Static Frontend Terraform module
 
 Terraform module which creates storage buckets, iam binding and access control resources on Google Cloud Platform. 
 
