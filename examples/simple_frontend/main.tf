@@ -20,10 +20,6 @@ resource "google_compute_managed_ssl_certificate" "this" {
   }
 }
 
-output "certificate" {
-  value = google_compute_managed_ssl_certificate.this
-}
-
 # --- Provision load balancer --- #
 module "loadbalancer" {
   source = "git@github.com:padok-team/terraform-google-lb.git?ref=376a847"
@@ -37,7 +33,7 @@ module "loadbalancer" {
           paths = ["/*"]
         }
       ]
-      bucket_name = module.frontend.bucket
+      bucket_name = module.frontend.bucket.name
     }
   }
   service_backends = {}
