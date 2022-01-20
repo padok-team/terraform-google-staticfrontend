@@ -1,3 +1,6 @@
+# Local terratest directories
+**/.test-data/*
+
 # Local .terraform directories
 **/.terraform/*
 
