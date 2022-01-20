@@ -180,6 +180,6 @@ func runValidate(t *testing.T, bucketName, domainName string) {
 	lbURL := fmt.Sprintf("https://%s", domainName)
 	err = http_helper.HttpGetWithRetryE(t, lbURL, &tls.Config{
 		InsecureSkipVerify: true,
-	}, 200, content, 20, time.Minute)
+	}, 200, content, 30, time.Minute)
 	require.NoError(t, err, "cannot read '%s'", lbURL)
 }
