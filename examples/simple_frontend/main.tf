@@ -1,18 +1,16 @@
 provider "google" {
-  project = "padok-lab"
-  region  = "europe-west1"
-  zone    = "europe-west1-b"
+  region = "europe-west1"
+  zone   = "europe-west1-b"
 }
-
-data "google_project" "this" {}
 
 locals {
   domain_name = "simplestaticfrontend.padok.cloud"
+  project_id  = "padok-cloud-factory"
 }
 
 # --- Generate Certificate --- #
 resource "google_compute_managed_ssl_certificate" "this" {
-  project = data.google_project.this.project_id
+  project = local.project_id
 
   name = replace(local.domain_name, ".", "-")
   managed {
@@ -22,9 +20,10 @@ resource "google_compute_managed_ssl_certificate" "this" {
 
 # --- Provision load balancer --- #
 module "loadbalancer" {
-  source = "git@github.com:padok-team/terraform-google-lb.git?ref=376a847"
+  source = "git@github.com:padok-team/terraform-google-lb.git?ref=v1.2.0"
 
-  name = replace(local.domain_name, ".", "-")
+  name       = replace(local.domain_name, ".", "-")
+  project_id = local.project_id
   buckets_backends = {
     frontend = {
       hosts = [local.domain_name]
@@ -42,7 +41,8 @@ module "loadbalancer" {
 
 # --- Deploy frontend --- #
 module "frontend" {
-  source   = "../.."
-  name     = "simplestaticfrontend"
-  location = "europe-west1"
+  source     = "../.."
+  name       = "simplestaticfrontend"
+  location   = "europe-west1"
+  project_id = data.google_project.this.project_id
 }
