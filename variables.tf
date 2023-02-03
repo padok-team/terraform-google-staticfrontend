@@ -8,6 +8,11 @@ variable "location" {
   type        = string
 }
 
+variable "project_id" {
+  description = "The project to deploy the ressources to."
+  type        = string
+}
+
 variable "labels" {
   description = "Labels to apply to the service."
   type        = map(string)

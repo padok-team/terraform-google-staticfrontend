@@ -1,10 +1,7 @@
 provider "google" {
-  project = "padok-cloud-factory"
-  region  = "europe-west1"
-  zone    = "europe-west1-b"
+  region = "europe-west1"
+  zone   = "europe-west1-b"
 }
-
-data "google_project" "this" {}
 
 locals {
   domain_name     = "padok.cloud"
@@ -14,12 +11,13 @@ locals {
     google_compute_managed_ssl_certificate.this["frontend1.padok.cloud"].id,
     google_compute_managed_ssl_certificate.this["frontend2.padok.cloud"].id
   ]
+  project_id = "padok-cloud-factory"
 }
 
 # --- Generate Certificates --- #
 resource "google_compute_managed_ssl_certificate" "this" {
   for_each = toset(local.hosts)
-  project  = data.google_project.this.project_id
+  project  = local.project_id
 
   name = replace(each.value, ".", "-")
   managed {
@@ -29,9 +27,10 @@ resource "google_compute_managed_ssl_certificate" "this" {
 
 # --- Provision load balancer --- #
 module "loadbalancer" {
-  source = "git@github.com:padok-team/terraform-google-lb.git?ref=376a847"
+  source = "git@github.com:padok-team/terraform-google-lb.git?ref=v1.2.0"
 
-  name = replace(local.domain_name, ".", "-")
+  name       = replace(local.domain_name, ".", "-")
+  project_id = local.project_id
   buckets_backends = {
     frontend-1 = {
       hosts = ["frontend1.padok.cloud"]
@@ -58,13 +57,15 @@ module "loadbalancer" {
 
 # --- Deploy frontends --- #
 module "frontend1" {
-  source   = "../.."
-  name     = "frontendpadok1"
-  location = "europe-west1"
+  source     = "../.."
+  name       = "frontendpadok1"
+  location   = "europe-west1"
+  project_id = local.project_id
 }
 
 module "frontend2" {
-  source   = "../.."
-  name     = "frontendpadok2"
-  location = "europe-west1"
+  source     = "../.."
+  name       = "frontendpadok2"
+  location   = "europe-west1"
+  project_id = local.project_id
 }

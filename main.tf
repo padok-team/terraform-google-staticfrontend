@@ -1,6 +1,7 @@
 # create a bucket
 resource "google_storage_bucket" "this" {
   name     = var.name
+  project  = var.project_id
   location = var.location
   labels   = var.labels
 
@@ -18,8 +19,9 @@ resource "google_storage_bucket" "this" {
 
 # make it public
 resource "google_storage_bucket_iam_binding" "this" {
-  bucket = google_storage_bucket.this.name
-  role   = "roles/storage.objectViewer"
+  bucket  = google_storage_bucket.this.name
+  project = var.project_id
+  role    = "roles/storage.objectViewer"
   members = [
     "allUsers",
   ]
@@ -32,9 +34,10 @@ resource "google_storage_bucket_iam_binding" "this" {
 }
 
 resource "google_storage_bucket_access_control" "this" {
-  bucket = google_storage_bucket.this.name
-  role   = "READER"
-  entity = "allUsers"
+  bucket  = google_storage_bucket.this.name
+  project = var.project_id
+  role    = "READER"
+  entity  = "allUsers"
 
   depends_on = [google_storage_bucket.this]
 

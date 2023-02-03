@@ -52,6 +52,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_location"></a> [location](#input\_location) | The location to use for your service. | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name of the service you're referring to. | `string` | n/a | yes |
+| <a name="input_project_id"></a> [project\_id](#input\_project\_id) | The project to deploy the ressources to. | `string` | n/a | yes |
 | <a name="input_force_destroy"></a> [force\_destroy](#input\_force\_destroy) | The feature flag to allow destroying bucket event if it contains files. | `bool` | `false` | no |
 | <a name="input_labels"></a> [labels](#input\_labels) | Labels to apply to the service. | `map(string)` | <pre>{<br>  "terraform": "true"<br>}</pre> | no |
 
