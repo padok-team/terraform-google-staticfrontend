@@ -44,5 +44,5 @@ module "frontend" {
   source     = "../.."
   name       = "simplestaticfrontend"
   location   = "europe-west1"
-  project_id = data.google_project.this.project_id
+  project_id = local.project_id
 }
