@@ -20,7 +20,6 @@ resource "google_storage_bucket" "this" {
 # make it public
 resource "google_storage_bucket_iam_binding" "this" {
   bucket  = google_storage_bucket.this.name
-  project = var.project_id
   role    = "roles/storage.objectViewer"
   members = [
     "allUsers",
@@ -35,7 +34,6 @@ resource "google_storage_bucket_iam_binding" "this" {
 
 resource "google_storage_bucket_access_control" "this" {
   bucket  = google_storage_bucket.this.name
-  project = var.project_id
   role    = "READER"
   entity  = "allUsers"
 
