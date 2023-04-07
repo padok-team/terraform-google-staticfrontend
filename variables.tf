@@ -26,3 +26,8 @@ variable "force_destroy" {
   type        = bool
   default     = false
 }
+variable "uniform_bucket_level_access" {
+  description = "Whether to enable uniform bucket-level access for the bucket."
+  type        = bool
+  default     = true
+}
