@@ -1,20 +1,20 @@
 variable "name" {
-  description = "The name of the service you're referring to."
+  description = "The name of the service."
   type        = string
 }
 
 variable "location" {
-  description = "The location to use for your service."
+  description = "The location to deploy the service to."
   type        = string
 }
 
 variable "project_id" {
-  description = "The project to deploy the ressources to."
+  description = "The project to deploy the resources to."
   type        = string
 }
 
 variable "labels" {
-  description = "Labels to apply to the service."
+  description = "A list of labels to apply to the service."
   type        = map(string)
   default = {
     "terraform" = "true",
@@ -22,7 +22,12 @@ variable "labels" {
 }
 
 variable "force_destroy" {
-  description = "The feature flag to allow destroying bucket event if it contains files."
+  description = "A flag to allow destroying bucket even if it contains files."
   type        = bool
   default     = false
+}
+variable "uniform_bucket_level_access" {
+  description = "Whether to enable uniform bucket-level access for the bucket."
+  type        = bool
+  default     = true
 }
