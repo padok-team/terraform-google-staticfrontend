@@ -16,6 +16,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Install SSH Client
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY_TERRATEST_GOOGLE_NETWORK }}
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
