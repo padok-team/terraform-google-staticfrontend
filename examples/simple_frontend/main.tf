@@ -20,7 +20,8 @@ resource "google_compute_managed_ssl_certificate" "this" {
 
 # --- Provision load balancer --- #
 module "loadbalancer" {
-  source = "git@github.com:padok-team/terraform-google-lb.git?ref=v1.2.0"
+  #checkov:skip=CKV_TF_1: "Ensure Terraform module sources use a commit hash"
+  source = "github.com/padok-team/terraform-google-lb?ref=v1.4.0"
 
   name       = replace(local.domain_name, ".", "-")
   project_id = local.project_id
