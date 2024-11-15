@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.2](https://github.com/padok-team/terraform-google-staticfrontend/compare/v1.1.1...v1.1.2) (2024-11-15)
+
+
+### Bug Fixes
+
+* add renovate.json with padok default config ([fecb818](https://github.com/padok-team/terraform-google-staticfrontend/commit/fecb8185294ffb03e8a3214d12be1591fef73a3e))
+* **ccheckov:** move down skip test ([41581cb](https://github.com/padok-team/terraform-google-staticfrontend/commit/41581cbf37b1b2e3e2c9dc074eec6cdce4949f55))
+
 ## [1.1.1](https://github.com/padok-team/terraform-google-staticfrontend/compare/v1.1.0...v1.1.1) (2023-02-03)
 
 
